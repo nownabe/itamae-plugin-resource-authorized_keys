@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-In you recipe:
+In your recipe:
 
 ```ruby
 require "itamae/plugin/resource/ssh_key"

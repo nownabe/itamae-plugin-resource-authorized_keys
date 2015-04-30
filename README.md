@@ -1,8 +1,6 @@
 # Itamae::Plugin::Resource::SshKey
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/itamae/plugin/resource/ssh_key`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem is an itamae plugin resource to provide user's SSH public key.
 
 ## Installation
 
@@ -22,7 +20,32 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+In you recipe:
+
+```ruby
+require "itamae/plugin/resource/ssh_key"
+
+user "user01"
+ssh_key "user01" do
+  ssh_keys "ssh-rsa A..."
+end
+
+user "user02"
+ssh_key "user02" do
+  ssh_keys ["ssh-rsa A...", "ssh-rsa A..."]
+end
+
+user "user03"
+ssh_key "user03" do
+  key_file "/home/user/.ssh/id_rsa.pub"
+end
+
+# Import SSH keys from github user.
+user "user04"
+ssh_key "user04" do
+  github_user "user04"
+end
+```
 
 ## Development
 

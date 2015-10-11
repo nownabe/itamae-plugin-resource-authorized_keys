@@ -4,7 +4,7 @@ require "itamae/resource/file"
 module Itamae
   module Plugin
     module Resource
-      class SshKey < ::Itamae::Resource::File
+      class AuthorizedKeys < ::Itamae::Resource::File
         define_attribute :username, type: String, default_name: true
         define_attribute :github_user, type: String
         define_attribute :key_file, type: String

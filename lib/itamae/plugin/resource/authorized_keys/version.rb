@@ -1,7 +1,7 @@
 module Itamae
   module Plugin
     module Resource
-      module SshKey
+      module AuthorizedKeys
         VERSION = "0.1.0"
       end
     end

@@ -44,4 +44,13 @@ namespace :integration do
     t.ruby_opts = "-I ./spec/integration"
     t.pattern = "spec/integration/*_spec.rb"
   end
+
+  desc "Destroy Vagrant Virtual Machine"
+  task :destroy do
+    env = {"VAGRANT_CWD" => File.expand_path("./spec/integration")}
+
+    Bundler.with_clearn_env do
+      system(env, "vagrant destroy #{VAGRANT_HOSTNAME}") || abort
+    end
+  end
 end

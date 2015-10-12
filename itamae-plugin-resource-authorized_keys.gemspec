@@ -1,10 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require "itamae/plugin/resource/authorized_keys/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "itamae-plugin-resource-authorized_keys"
-  spec.version       = "0.0.1"
+  spec.version       = Itamae::Plugin::Resource::AuthorizedKeys::VERSION
   spec.authors       = ["nownabe"]
   spec.email         = ["nownabe@gmail.com"]
 

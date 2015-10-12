@@ -15,8 +15,7 @@ else
   set :sudo_password, ENV['SUDO_PASSWORD']
 end
 
-host = ENV['TARGET_HOST']
-
+host = "itamae-spec-authorizedkeys"
 config = Tempfile.new('', Dir.tmpdir)
 
 Bundler.with_clean_env do
@@ -37,7 +36,7 @@ set :ssh_options, options
 # set :disable_sudo, true
 
 # Set environment variables
-# set :env, :LANG => 'C', :LC_MESSAGES => 'C' 
+# set :env, :LANG => 'C', :LC_MESSAGES => 'C'
 
 # Set PATH
 # set :path, '/sbin:/usr/local/sbin:$PATH'

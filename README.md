@@ -1,4 +1,4 @@
-# Itamae::Plugin::Resource::SshKey
+# Authorized Keys Resource for Itamae
 
 This gem is an itamae plugin resource to provide user's SSH public key.
 
@@ -7,43 +7,39 @@ This gem is an itamae plugin resource to provide user's SSH public key.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'itamae-plugin-resource-ssh_key'
+gem 'itamae-plugin-resource-authorized_keys'
 ```
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install itamae-plugin-resource-ssh_key
-
 ## Usage
 
 In your recipe:
 
 ```ruby
-require "itamae/plugin/resource/ssh_key"
+require "itamae/plugin/resource/authorized_keys"
 
 user "user01"
-ssh_key "user01" do
-  ssh_keys "ssh-rsa A..."
+authorized_keys "user01" do
+  content "ssh-rsa A..."
 end
 
 user "user02"
-ssh_key "user02" do
-  ssh_keys ["ssh-rsa A...", "ssh-rsa A..."]
+authorized_keys "user02" do
+  content ["ssh-rsa A...", "ssh-rsa A..."]
 end
 
 user "user03"
-ssh_key "user03" do
-  key_file "/home/user/.ssh/id_rsa.pub"
+authorized_keys "user03" do
+  source "/home/user/.ssh/id_rsa.pub"
 end
 
 # Import SSH keys from github user.
 user "user04"
-ssh_key "user04" do
-  github_user "user04"
+authorized_keys "user04" do
+  github "user04"
 end
 ```
 
@@ -55,7 +51,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/itamae-plugin-resource-ssh_key/fork )
+1. Fork it ( https://github.com/[my-github-username]/itamae-plugin-resource-authorized_keys/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

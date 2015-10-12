@@ -5,10 +5,10 @@ module Itamae
   module Plugin
     module Resource
       class AuthorizedKeys < ::Itamae::Resource::File
+        define_attribute :content, type: [String, Array]
+        define_attribute :github, type: String
+        define_attribute :source, type: String
         define_attribute :username, type: String, default_name: true
-        define_attribute :github_user, type: String
-        define_attribute :key_file, type: String
-        define_attribute :ssh_keys, type: [String, Array]
 
         def action_create(options)
           return unless user_exist?
@@ -44,10 +44,10 @@ module Itamae
         private
 
         def content_file
-          if attributes.ssh_keys
+          if ssh_keys
             nil
           else
-            attributes.key_file
+            source_file
           end
         end
 
@@ -74,7 +74,7 @@ module Itamae
         end
 
         def keys_from_github
-          open("https://github.com/#{attributes.github_user}.keys").read
+          open("https://github.com/#{attributes.github}.keys").read
         end
 
         def keys_path
@@ -93,18 +93,23 @@ module Itamae
           attributes.dir_group = attributes.username
         end
 
+        def source_file
+          @source_file ||= ::File.expand_path(attributes.source, @recipe.dir)
+        end
+
         def ssh_directory
           @ssh_directory ||= ::File.join(home_directory, ".ssh")
         end
 
         def ssh_keys
-          if attributes.ssh_keys
-            [*attributes.ssh_keys].join("\n")
-          elsif attributes.github_user
-            keys_from_github
-          else
-            nil
-          end
+          @ssh_keys ||=
+            if attributes.content
+              [*attributes.content].join("\n")
+            elsif attributes.github
+              keys_from_github
+            else
+              nil
+            end
         end
 
         def user_exist?

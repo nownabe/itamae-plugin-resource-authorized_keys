@@ -3,7 +3,7 @@ require "rspec/core/rake_task"
 require "tempfile"
 require "net/ssh"
 
-VAGRANT_HOSTNAME = "ipr-sshkey-spec"
+VAGRANT_HOSTNAME = "itamae-spec-authorizedkeys"
 
 desc "Run provisining vagrant and serverspec tests"
 task integration: ["integration:provision", "integration:spec"]
@@ -40,7 +40,6 @@ namespace :integration do
 
   desc "Run serverspec tests"
   RSpec::Core::RakeTask.new(:spec) do |t|
-    ENV["TARGET_HOST"] = VAGRANT_HOSTNAME
     t.ruby_opts = "-I ./spec/integration"
     t.pattern = "spec/integration/*_spec.rb"
   end

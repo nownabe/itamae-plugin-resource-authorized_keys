@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-VAGRANT_HOSTNAME = "ipr-sshkey-spec"
+VAGRANT_HOSTNAME = "itamae-spec-authorizedkeys"
 
 Vagrant.configure(2) do |config|
   config.vm.define VAGRANT_HOSTNAME do |c|

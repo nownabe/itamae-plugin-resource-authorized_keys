@@ -7,22 +7,22 @@ keys = File.read(keys_file).lines.map(&:chomp)
 
 user "test01"
 authorized_keys "test01" do
-  ssh_keys keys[0]
+  content keys[0]
 end
 
 user "test02"
 authorized_keys "test02" do
-  ssh_keys keys
+  content keys
 end
 
 user "test03"
 authorized_keys "test03" do
-  key_file keys_file
+  source keys_file
 end
 
-stub_request(:get, "https://github.com/test04.keys").
-  to_return(:status => 200, :body => keys.join("\n"), :headers => {})
+stub_request(:get, "https://github.com/test04.keys")
+  .to_return(status: 200, body: keys.join("\n"), headers: {})
 user "test04"
 authorized_keys "test04" do
-  github_user "test04"
+  github "test04"
 end

@@ -6,7 +6,7 @@ require "net/ssh"
 VAGRANT_HOSTNAME = "itamae-spec-authorizedkeys"
 
 desc "Run provisining vagrant and serverspec tests"
-task integration: ["integration:provision", "integration:spec"]
+task integration: ["integration:provision", "integration:spec", "integration:destroy"]
 
 namespace :integration do
   desc "Provision Vagrant"
@@ -48,7 +48,7 @@ namespace :integration do
   task :destroy do
     env = {"VAGRANT_CWD" => File.expand_path("./spec/integration")}
 
-    Bundler.with_clearn_env do
+    Bundler.with_clean_env do
       system(env, "vagrant destroy #{VAGRANT_HOSTNAME}") || abort
     end
   end

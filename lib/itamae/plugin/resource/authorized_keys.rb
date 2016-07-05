@@ -85,12 +85,12 @@ module Itamae
           attributes.content = ssh_keys
           attributes.mode    = "0600"
           attributes.owner   = attributes.username
-          attributes.group   = attributes.username
+          attributes.group   = run_specinfra(:get_user_gid, attributes.username).stdout.strip if attributes.group.nil?
           attributes.path    = keys_path
 
           attributes.dir_mode  = "0700"
           attributes.dir_owner = attributes.username
-          attributes.dir_group = attributes.username
+          attributes.dir_group = attributes.group
         end
 
         def source_file
